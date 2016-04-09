@@ -12,6 +12,7 @@
 
   <!-- Logger for our packages. -->
   <logger name="org.riceapps" level="DEBUG" />
+  <logger name="lightning.server" level="INFO" />
 
   <!-- By default, the level of the root level is set to DEBUG -->
   <root level="WARN">

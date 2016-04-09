@@ -2,12 +2,19 @@ package org.riceapps.hackathon.controllers;
 
 import static lightning.server.Context.*;
 import static lightning.enums.HTTPMethod.*;
+
+import java.util.Map;
+
+import com.google.common.collect.ImmutableMap;
+
 import lightning.ann.*;
 
-@Controller
-public class HomeController {
+public final class HomeController extends AbstractController {
   @Route(path="/", methods={GET})
-  public void handleHome() throws Exception {
-    response().write("Hello World!");
+  @Template("home.ftl")
+  public Map<String, ?> handleHome() throws Exception {
+    return ImmutableMap.of(
+      "username", isLoggedIn() ? user().getUserName() : ""
+    );
   }
 }

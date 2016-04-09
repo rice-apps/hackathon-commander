@@ -18,5 +18,13 @@
         "username": "httpd",
         "password": "httpd",
         "name": "hackathonapp"
+    },
+    "mail": {
+        "host": "host225.hostmonster.com",
+        "port": 465,
+        "use_ssl": true,
+        "address": "donotreply@riceapps.org",
+        "username": "donotreply@riceapps.org",
+        "password": ""
     }
 }
