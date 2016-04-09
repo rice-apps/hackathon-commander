@@ -32,7 +32,6 @@ import lightning.mail.Message;
 import lightning.users.User;
 import lightning.util.Time;
 
-import org.riceapps.hackathon.db.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,13 +44,11 @@ public class VerifyEmailController extends AbstractController {
   @RequireAuth
   @Template("verify_email.ftl")
   @Route(path="/a/verify-email", methods={GET})
-  public Map<String, ?> handleGET() throws Exception {
-    UserUtil u = new UserUtil(db(), user());
-    
+  public Map<String, ?> handleGET() throws Exception {    
     String message = "";
-    if (u.isFromHostUniversity()) {
+    if (userUtil().isFromHostUniversity()) {
       message = "You are now eligible to host visiting hackers and your hacking application will be automatically accepted.";
-    } else if (u.isAutoAccepted()) {
+    } else if (userUtil().isAutoAccepted()) {
       message = "Your hacking application will be automatically accepted.";
     } else {
       message = "You have increased the strength of your hacker application.";
