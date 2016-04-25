@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,37 +27,39 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-</head>
-<body>
-<div class="container">
+  </head>
+  <body>
+    <div class="container">
+      <div class="col-sm-12 text-center">
+        <h1>HackRice Log In</h1>
 
-    <div class="col-sm-12 text-center">
-        <h1>HackRice</h1><br>
-        <button onclick="redirect(this)" name="login" type="button" class="btn btn-default btn-lg">Log in</button><br><br>
+          <form action="/login_user" method="post" name="login">
+            {{ form.hidden_tag() }}
+            <p>
+                Username:<br>
+                {{ form.username(size=40) }}<br>
+            </p>
+            <p>
+                Password:<br>
+                {{ form.password(size=40) }}<br>
+            </p>
+            <p><input type="submit" ></p>
+          </form>
 
-        <button onclick="redirect(this)" name="non-rice" type="button" class="btn btn-primary btn-lg">Sign up</button><br><br>
-
-        <button onclick="redirect(this)" name="rice" type="button" class="btn btn-default btn-lg">Sign up using Rice netid</button>
-
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul class=flashes>
+              {% for message in messages %}
+                {{ message }}
+              {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+        </div>
     </div>
 
-</div>
 
-{% block content %}{% endblock %}
-</body>
-
-<script>
-    function redirect(button) {
-        console.log(button.name);
-        if (button.name == 'rice')
-            window.location.href = '/login';
-        else if (button.name == 'login')
-           window.location.href = '/login_user';
-        else
-            window.location.href = '/signup';
-
-    }
-</script>
+  </body>
 
 
 </html>
