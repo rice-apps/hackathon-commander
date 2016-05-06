@@ -1,6 +1,7 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, DateField, BooleanField, TextAreaField, PasswordField, validators
+from wtforms import StringField, DateField, BooleanField, TextAreaField, PasswordField, FileField, RadioField, validators
 from wtforms.validators import DataRequired
+
 
 class LoginForm(Form):
     username = StringField('username', validators=[DataRequired()])
@@ -13,18 +14,20 @@ class SignupForm(Form):
                                                      validators.EqualTo('confirmation', message='Passwords must match')])
     confirmation = PasswordField('Repeat Password')
 
-# class ApplicationForm(Form):
-#     first_name = StringField('first_name', validators=[DataRequired()])
-#     last_name = StringField('last_name', validators=[DataRequired()])
-#     birth_date = DateField('birth_date', validators=[DataRequired()])
-#     has_team = BooleanField('has_team',  validators=[DataRequired()])
-#     email = StringField('email', validators=[DataRequired()])
-#     from_rice = BooleanField('from_rice',  validators=[DataRequired()])
-#     school = StringField('school', validators=[DataRequired()])
-#     traveling_from = StringField('traveling_from', validators=[DataRequired()])
-#     travel_plan = StringField('travel_plan', validators=[DataRequired()])
-#     graduation = DateField('graduation', validators=[DataRequired()])
-#     gender = StringField('gender', validators=[DataRequired()])
-#     links = TextAreaField('links', validators=[DataRequired()])
-#     is_first_hackathon = db.Column(db.Integer, index=True)
-#     resume_hash = db.Column(db.String(256))
+
+class ApplicationForm(Form):
+    first_name = StringField(validators=[DataRequired()])
+    last_name = StringField(validators=[DataRequired()])
+    birth_date = DateField(validators=[DataRequired()])
+    email = StringField(validators=[DataRequired()])
+    has_team = BooleanField(validators=[DataRequired()])
+    team_name = StringField()
+    from_rice = BooleanField(validators=[DataRequired()])
+    school = StringField(validators=[DataRequired()])
+    traveling_from = StringField(validators=[DataRequired()])
+    travel_plan = StringField(validators=[DataRequired()])
+    graduation = DateField(validators=[DataRequired()])
+    gender = RadioField(validators=[DataRequired()], choices=[('oman', 'Woman'), ('man', 'Man'), ('other', 'Other')])
+    links = TextAreaField(validators=[DataRequired()])
+    is_first_hackathon = BooleanField(validators=[DataRequired()])
+    resume = FileField(validators=[DataRequired()])
