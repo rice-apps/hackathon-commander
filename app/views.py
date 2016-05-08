@@ -40,31 +40,36 @@ def signup():
     #     return redirect(url_for('index'))
     form = SignupForm()
     if request.method == 'POST' and form.validate_on_submit():
-
-        print(form.username.data, form.password.data, form.confirmation.data)
         password_hash = bcrypt.generate_password_hash(form.password.data)
-        print (password_hash)
-        new_user = User(form.username.data, password_hash)
+        new_user = User(form.username.data, form.email.data, password_hash)
         db.session.add(new_user)
         db.session.commit()
-        return redirect('/home')
+        return redirect('/application')
 
     elif request.method == 'POST':
-        flash('Passwords must match')
+
+        if len(form.username.data) < 4:
+            flash('Your username has to be between 4 and 25 characters in length.\n')
+        if len(form.username.data) < 8:
+            flash('Your password has to be at least 8 characters in length.\n')
+        if form.password.data != form.confirmation.data:
+            flash('Passwords must match.\n')
 
     return render_template('signup.html', form=form)
 
 
-@app.route('/login_user',methods=['GET', 'POST'])
+@app.route('/login_user', methods=['GET', 'POST'])
 def login():
     print(g.user)
     # if g.user is not None and g.user.is_authenticated:
     #     return redirect(url_for('index'))
     form = LoginForm()
     if request.method == 'POST' and form.validate_on_submit():
-
-        print(form.username.data, form.password.data)
-        return redirect('/home')
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is not None:
+            return redirect('/application')
+        else:
+            flash('Incorrect username or password.')
 
     return render_template('login.html', form=form)
 

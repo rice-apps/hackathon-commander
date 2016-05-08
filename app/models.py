@@ -4,10 +4,12 @@ from app import db
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True)
+    email = db.Column(db.String(64), index=True)
     password_hash = db.Column(db.String(60))
 
-    def __init__(self, username, hash):
+    def __init__(self, username, email, hash):
         self.username = username
+        self.email = email
         self.password_hash = hash
 
     @property

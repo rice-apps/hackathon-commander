@@ -10,7 +10,8 @@ class LoginForm(Form):
 
 class SignupForm(Form):
     username = StringField('username', validators=[validators.Length(min=4, max=25)])
-    password = PasswordField('password', validators=[validators.Length(min=8, max=25),
+    email = StringField('e-mail', validators=[DataRequired()])
+    password = PasswordField('password', validators=[validators.Length(min=8),
                                                      validators.EqualTo('confirmation', message='Passwords must match')])
     confirmation = PasswordField('Repeat Password')
 
@@ -27,7 +28,7 @@ class ApplicationForm(Form):
     traveling_from = StringField(validators=[DataRequired()])
     travel_plan = StringField(validators=[DataRequired()])
     graduation = DateField(validators=[DataRequired()])
-    gender = RadioField(validators=[DataRequired()], choices=[('oman', 'Woman'), ('man', 'Man'), ('other', 'Other')])
+    gender = RadioField(validators=[DataRequired()], choices=[('woman', 'Woman'), ('man', 'Man'), ('other', 'Other')])
     links = TextAreaField(validators=[DataRequired()])
     is_first_hackathon = BooleanField(validators=[DataRequired()])
     resume = FileField(validators=[DataRequired()])

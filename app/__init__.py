@@ -14,7 +14,6 @@ bcrypt = Bcrypt(app)
 CAS(app)
 
 
-
 from app import admin_views, views, models
 
 

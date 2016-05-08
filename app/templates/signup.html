@@ -30,35 +30,38 @@
   </head>
   <body>
     <div class="container">
-      <div class="col-sm-12 text-center">
+      <div class="col-md-12 text-center">
         <h1>HackRice Sign Up</h1>
 
-          <form action="/signup" method="post" name="login">
-            {{ form.hidden_tag() }}
-            <p>
-                Username:<br>
-                {{ form.username(size=40) }}<br>
-            </p>
-            <p>
-                Password:<br>
-                {{ form.password(size=40) }}<br>
-            </p>
-            <p>
-                Confirm your password:<br>
-                {{ form.confirmation(size=40) }}<br>
-            </p>
-            <p><input type="submit" ></p>
-          </form>
+        <form action="/signup" method="post">
+          {{ form.hidden_tag() }}
+          <div class="form-group col-md-4 col-md-offset-4">
+            Username:<br>
+            {{ form.username(class="form-control") }}<br>
 
-          {% with messages = get_flashed_messages() %}
-            {% if messages %}
-              <ul class=flashes>
+            E-mail:<br>
+            {{ form.email(type="email", class="form-control") }}<br>
+
+            Password:<br>
+            {{ form.password(class="form-control") }}<br>
+
+            Confirm your password:<br>
+            {{ form.confirmation(class="form-control") }}<br>
+
+            <input type="submit" class="btn btn-primary">
+          </div>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert alert-danger col-md-4 col-md-offset-4">
               {% for message in messages %}
-                {{ message }}
+                {{ message }} <br><br>
               {% endfor %}
-              </ul>
-            {% endif %}
-          {% endwith %}
+             </div>
+          {% endif %}
+        {% endwith %}
+
         </div>
     </div>
 
