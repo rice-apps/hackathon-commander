@@ -3,18 +3,31 @@ from app import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True)
-    email = db.Column(db.String(64), index=True)
+    email = db.Column(db.String(64), index=True, unique=True)
     password_hash = db.Column(db.String(60))
+    authenticated = db.Column(db.Boolean, default=False)
+    is_cas_authenticated = db.Column(db.Boolean)
 
-    def __init__(self, username, email, hash):
-        self.username = username
+    def __init__(self, email, password_hash):
         self.email = email
-        self.password_hash = hash
+        self.password_hash = password_hash
 
-    @property
     def is_authenticated(self):
+        return self.authenticated
+
+    @staticmethod
+    def is_active():
         return True
+
+    @staticmethod
+    def is_anonymous():
+        return False
+
+    def get_id(self):
+        try:
+            return unicode(self.id)  # python 2
+        except NameError:
+            return str(self.id)  # python 3
 
 
 class Application(db.Model):
@@ -35,4 +48,4 @@ class Application(db.Model):
     resume_hash = db.Column(db.String(256))
 
     def __repr__(self):
-        return '<User %r>' % (self.first_name)
+        return '<User %r>' % self.first_name

@@ -4,12 +4,11 @@ from wtforms.validators import DataRequired
 
 
 class LoginForm(Form):
-    username = StringField('username', validators=[DataRequired()])
+    email = StringField('e-mail', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
 
 
 class SignupForm(Form):
-    username = StringField('username', validators=[validators.Length(min=4, max=25)])
     email = StringField('e-mail', validators=[DataRequired()])
     password = PasswordField('password', validators=[validators.Length(min=8),
                                                      validators.EqualTo('confirmation', message='Passwords must match')])

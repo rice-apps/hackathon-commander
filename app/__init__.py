@@ -11,7 +11,7 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 bcrypt = Bcrypt(app)
-CAS(app)
+cas = CAS(app)
 
 
 from app import admin_views, views, models

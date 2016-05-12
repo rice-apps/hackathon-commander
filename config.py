@@ -8,4 +8,6 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
 CAS_SERVER = 'https://netid.rice.edu'
-CAS_AFTER_LOGIN = 'application'
+CAS_AFTER_LOGIN = 'cas_after_login'
+CAS_AFTER_LOGOUT = 'logout_user'
+APP_URL = 'http://localhost:5000'
